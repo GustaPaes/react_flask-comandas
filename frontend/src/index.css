@@ -3,8 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: rgba(255, 255, 255, 0.98);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -13,13 +12,10 @@
 
 /* incluir para aplicar no id da div principal, a div root */
 #root {
+  height: 100%; /* Altura total do root */
   width: 100%; /* Largura total do root */
-  max-width: 900px; /* Define uma largura máxima para o conteúdo */
-  background-color: white; /* Cor de fundo do conteúdo */
-  padding: 16px; /* Espaçamento interno */
-  border-radius: 8px; /* Bordas arredondadas */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar o conteúdo */
-  box-sizing: border-box; /* Inclui padding no cálculo do tamanho */
+  background-color: rgba(255, 255, 255, 0.98); /* Cor de fundo do conteúdo */
+  padding: 30px; /* Espaçamento interno */
 }
 
 a {
@@ -40,7 +36,7 @@ body {
   align-items: flex-start; /* Fixa o conteúdo no topo */
   min-width: 320px;
   min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
-  background-color: #443c3c; /* Cor de fundo */
+  background-color: rgba(255, 255, 255, 0.98); /* Cor de fundo */
   box-sizing: border-box; /* Inclui padding e border no cálculo do tamanho */
 }
 

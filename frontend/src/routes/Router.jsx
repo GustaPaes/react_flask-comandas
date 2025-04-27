@@ -10,10 +10,10 @@ const LoginForm = lazy(() => import("../pages/LoginForm"));
 const Home = lazy(() => import("../pages/Home"));
 const FuncionarioList = lazy(() => import("../pages/FuncionarioList"));
 const FuncionarioForm = lazy(() => import("../pages/FuncionarioForm"));
-// const ClienteList = lazy(() => import("../pages/ClienteList"));
-// const ClienteForm = lazy(() => import("../pages/ClienteForm"));
-// const ProdutoList = lazy(() => import("../pages/ProdutoList"));
-// const ProdutoForm = lazy(() => import("../pages/ProdutoForm"));
+const ClienteList = lazy(() => import("../pages/ClienteList"));
+const ClienteForm = lazy(() => import("../pages/ClienteForm"));
+const ProdutoList = lazy(() => import("../pages/ProdutoList"));
+const ProdutoForm = lazy(() => import("../pages/ProdutoForm"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
 // Componente de fallback para carregamento
@@ -61,7 +61,7 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
-        {/* <Route
+        <Route
           path="/clientes"
           element={
             <PrivateRoute>
@@ -96,7 +96,7 @@ const AppRoutes = () => {
               <ProdutoForm />{" "}
             </PrivateRoute>
           }
-        /> */}
+        />
 
         {/* Rota para páginas não encontradas */}
         <Route path="*" element={<NotFound />} />

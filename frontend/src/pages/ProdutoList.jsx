@@ -15,7 +15,7 @@ import {
 import { Edit, Delete, Visibility, FiberNew } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
-function FuncionarioList() {
+function ProdutoList() {
   const navigate = useNavigate();
 
   return (
@@ -31,32 +31,35 @@ function FuncionarioList() {
         }}
       >
         <Typography variant="h6" color="#804b0f">
-          Funcionários
+          Produtos
         </Typography>
         <Button
           color="#804b0f"
-          onClick={() => navigate("/funcionario")}
+          onClick={() => navigate("/produto")}
           startIcon={<FiberNew />}
         >
           Novo
         </Button>
       </Toolbar>
+
       <Table>
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
             <TableCell>Nome</TableCell>
-            <TableCell>CPF</TableCell>
-            <TableCell>Matrícula</TableCell>
+            <TableCell>Descrição</TableCell>
+            <TableCell>Valor Unitário</TableCell>
+            <TableCell>Foto</TableCell>
             <TableCell>Ações</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           <TableRow key={1}>
+            <TableCell>10</TableCell>
+            <TableCell>Produto 1</TableCell>
             <TableCell>1</TableCell>
-            <TableCell>Gustavo Paes de Liz</TableCell>
-            <TableCell>12345</TableCell>
-            <TableCell>150585</TableCell>
+            <TableCell>1</TableCell>
+            <TableCell>Foto Indisponível</TableCell>
             <TableCell>
               <IconButton>
                 {" "}
@@ -77,5 +80,4 @@ function FuncionarioList() {
     </TableContainer>
   );
 }
-
-export default FuncionarioList;
+export default ProdutoList;

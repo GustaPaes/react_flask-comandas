@@ -4,11 +4,11 @@ import { Box, Typography, Toolbar } from "@mui/material";
 const NotFound = () => {
   return (
     <Box
-      sx={{ backgroundColor: "#ADD8E6", padding: 1, borderRadius: 1, mt: 2 }}
+      sx={{ backgroundColor: "#ed8f24", padding: 1, borderRadius: 1, mt: 2 }}
     >
       <Toolbar
         sx={{
-          backgroundColor: "#ADD8E6",
+          backgroundColor: "#ed8f24",
           padding: 1,
           borderRadius: 2,
           mb: 2,
@@ -16,7 +16,7 @@ const NotFound = () => {
           justifyContent: "space-between",
         }}
       >
-        <Typography variant="h6" color="primary">
+        <Typography variant="h6" color="#804b0f">
           404 - NotFound
         </Typography>
       </Toolbar>

@@ -1,12 +1,15 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Container } from "@mui/material";
+
 import { AuthProvider } from "./context/AuthContext";
-import Navbar from "./pages/Navbar";
 import AppRoutes from "./routes/Router";
+import Navbar from "./pages/Navbar";
+
 // toastify para notificações
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     // O BrowserRouter é o roteador principal que gerencia as rotas da aplicação
@@ -23,7 +26,7 @@ function App() {
 
         {/* O Container é um componente do Material-UI que fornece um layout responsivo e centralizado */}
         <Container sx={{ mt: 4 }}>
-          
+
           {/* O AppRoutes é o componente que contém as rotas da aplicação, definindo quais componentes devem ser renderizados em cada rota */}
           <AppRoutes />
         </Container>

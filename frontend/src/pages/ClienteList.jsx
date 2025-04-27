@@ -15,7 +15,7 @@ import {
 import { Edit, Delete, Visibility, FiberNew } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
-function FuncionarioList() {
+function ClienteList() {
   const navigate = useNavigate();
 
   return (
@@ -31,23 +31,24 @@ function FuncionarioList() {
         }}
       >
         <Typography variant="h6" color="#804b0f">
-          Funcionários
+          Clientes
         </Typography>
         <Button
           color="#804b0f"
-          onClick={() => navigate("/funcionario")}
+          onClick={() => navigate("/cliente")}
           startIcon={<FiberNew />}
         >
           Novo
         </Button>
       </Toolbar>
+
       <Table>
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
             <TableCell>Nome</TableCell>
             <TableCell>CPF</TableCell>
-            <TableCell>Matrícula</TableCell>
+            <TableCell>Telefone</TableCell>
             <TableCell>Ações</TableCell>
           </TableRow>
         </TableHead>
@@ -55,8 +56,8 @@ function FuncionarioList() {
           <TableRow key={1}>
             <TableCell>1</TableCell>
             <TableCell>Gustavo Paes de Liz</TableCell>
-            <TableCell>12345</TableCell>
-            <TableCell>150585</TableCell>
+            <TableCell>1</TableCell>
+            <TableCell>1</TableCell>
             <TableCell>
               <IconButton>
                 {" "}
@@ -77,5 +78,4 @@ function FuncionarioList() {
     </TableContainer>
   );
 }
-
-export default FuncionarioList;
+export default ClienteList;

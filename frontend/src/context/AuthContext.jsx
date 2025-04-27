@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // Criação do contexto
 const AuthContext = createContext();
@@ -20,9 +21,10 @@ export const AuthProvider = ({ children }) => {
     if (username === "abc" && password === "bolinhas") {
       setIsAuthenticated(true);
       sessionStorage.setItem("loginRealizado", "true");
+      toast.success("Usuário logado com sucesso!");
       navigate("/home");
     } else {
-      alert("Usuário ou senha inválidos!");
+      toast.error("Usuário ou senha inválidos!");
     }
   };
 
@@ -30,6 +32,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setIsAuthenticated(false);
     sessionStorage.removeItem("loginRealizado");
+    toast.success("Deslogado com sucesso");
     navigate("/login");
   };
 
