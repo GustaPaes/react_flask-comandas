@@ -38,13 +38,24 @@ export const deleteFuncionario = async (id) => {
   return response.data;
 };
 
-// Verificar se CPF já existe
+// Adicione este novo método ( TODO: Implementar no backend uma rota para fazer a consulta direta no banco )
 export const checkCpfExist = async (cpf, currentId = null) => {
-  const response = await axios.get(`${PROXY_URL}check-cpf`, {
-    params: {
-      cpf,
-      current_id: currentId,
-    },
-  });
-  return response.data.exists;
+  try {
+    const allFuncionarios = await getFuncionarios();
+
+    // Encontra funcionário com o mesmo CPF, excluindo o atual em edição
+    const existing = allFuncionarios.find(
+      (f) =>
+        f.cpf === cpf &&
+        (!currentId || f.id_funcionario !== parseInt(currentId))
+    );
+
+    return {
+      exists: !!existing,
+      existingId: existing?.id_funcionario || null,
+    };
+  } catch (error) {
+    console.error("Erro ao verificar CPF:", error);
+    return { exists: false, existingId: null };
+  }
 };

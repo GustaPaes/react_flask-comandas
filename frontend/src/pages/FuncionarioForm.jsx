@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-// Controller é usado para conectar os campos do formulário ao estado do formulário gerenciado pelo useForm.
-// O Controller é um componente que envolve o campo do formulário e fornece as propriedades e métodos necessários para gerenciar o estado do campo.
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
   TextField,
@@ -12,43 +10,37 @@ import {
   InputLabel,
   Select,
   Toolbar,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
 } from "@mui/material";
 import IMaskInputWrapper from "../components/IMaskInputWrapper";
-// import dos services de funcionário, faz a comunicação com o backend
 import {
   createFuncionario,
   updateFuncionario,
   getFuncionarioById,
+  checkCpfExist // Importe o novo método
 } from "../services/funcionarioService";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const FuncionarioForm = () => {
-  // O useParams retorna um objeto com os parâmetros da URL, que podem ser acessados pelas chaves correspondentes.
-  // O id é o parâmetro da URL que representa o id do funcionário a ser editado ou visualizado.
-  // O opr é o parâmetro da URL que representa a operação a ser realizada (edit ou view).
   const { id, opr } = useParams();
-
-  // useNavigate é usado para navegar entre páginas.
   const navigate = useNavigate();
+  const [openDialog, setOpenDialog] = useState(false);
+  const [existingFuncionarioId, setExistingFuncionarioId] = useState(null);
 
-  // useForm: usado para gerenciar o estado do formulário, como os valores dos campos e as validações.
-  // O useForm retorna um objeto com várias propriedades e métodos, como control, handleSubmit, reset e formState.
-  // control: usado para conectar os campos do formulário ao estado do formulário gerenciado pelo useForm.
-  // handleSubmit: função que lida com o envio do formulário e valida os dados.
-  // reset: função que redefine os valores do formulário para os valores iniciais.
-  // formState: objeto que contém o estado do formulário, como erros de validação e se o formulário está sendo enviado.
   const {
     control,
     handleSubmit,
     reset,
-    formState: { errors },
+    trigger,
+    formState: { errors, isValid },
   } = useForm();
 
-  // Se opr for 'view', será utilizada para ajustar o formulário como somente leitura.
   const isReadOnly = opr === "view";
 
-  // title: variável que define o título do formulário com base na operação e no id.
   let title;
   if (opr === "view") {
     title = `Visualizar Funcionário: ${id}`;
@@ -57,6 +49,24 @@ const FuncionarioForm = () => {
   } else {
     title = "Novo Funcionário";
   }
+
+  const validateCpf = async (cpf) => {
+    if (!cpf) return true;
+
+    try {
+      const { exists, existingId } = await checkCpfExist(cpf, id);
+
+      if (exists) {
+        setExistingFuncionarioId(existingId);
+        setOpenDialog(true);
+        return "CPF já cadastrado";
+      }
+      return true;
+    } catch (error) {
+      console.error("Erro na validação do CPF:", error);
+      return "Erro ao validar CPF";
+    }
+  };
 
   // useEffect: usado para executar efeitos colaterais, como buscar dados do backend ou atualizar o estado do componente.
   // useEffect é um hook que permite executar efeitos colaterais em componentes funcionais.
@@ -158,7 +168,10 @@ const FuncionarioForm = () => {
           name="cpf"
           control={control}
           defaultValue=""
-          rules={{ required: "CPF é obrigatório" }}
+          rules={{
+            required: "CPF é obrigatório",
+            validate: validateCpf,
+          }}
           render={({ field }) => (
             <TextField
               {...field}
@@ -168,19 +181,51 @@ const FuncionarioForm = () => {
               margin="normal"
               error={!!errors.cpf}
               helperText={errors.cpf?.message}
+              onBlur={() => !isReadOnly && trigger("cpf")}
               InputProps={{
                 inputComponent: IMaskInputWrapper,
                 inputProps: {
                   mask: "000.000.000-00",
-                  definitions: {
-                    0: /\d/,
-                  },
+                  definitions: { 0: /\d/ },
                   unmask: true,
                 },
               }}
             />
           )}
         />
+
+        <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+          <DialogTitle>CPF já cadastrado</DialogTitle>
+          <DialogContent>
+            <Typography>
+              Já existe um funcionário com este CPF cadastrado.
+            </Typography>
+            <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
+              Escolha uma ação:
+            </Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenDialog(false)}>Cancelar</Button>
+            <Button
+              onClick={() => {
+                navigate(`/funcionario/view/${existingFuncionarioId}`);
+                setOpenDialog(false);
+              }}
+              color="primary"
+            >
+              Visualizar
+            </Button>
+            <Button
+              onClick={() => {
+                navigate(`/funcionario/edit/${existingFuncionarioId}`);
+                setOpenDialog(false);
+              }}
+              color="primary"
+            >
+              Editar
+            </Button>
+          </DialogActions>
+        </Dialog>
         <Controller
           name="matricula"
           control={control}
