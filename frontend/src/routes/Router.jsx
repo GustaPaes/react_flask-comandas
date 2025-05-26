@@ -61,6 +61,7 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
+        <Route path="/funcionario/:opr/:id" element={<PrivateRoute> <FuncionarioForm /> </PrivateRoute>} />
         <Route
           path="/clientes"
           element={
