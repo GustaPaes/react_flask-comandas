@@ -80,6 +80,7 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
+        <Route path="/cliente/:opr/:id" element={<PrivateRoute> <ClienteForm /> </PrivateRoute>} />
         <Route
           path="/produtos"
           element={
@@ -98,6 +99,7 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
+        <Route path="/produto/:opr/:id" element={<PrivateRoute> <ProdutoForm /> </PrivateRoute>} />
 
         {/* Rota para páginas não encontradas */}
         <Route path="*" element={<NotFound />} />
