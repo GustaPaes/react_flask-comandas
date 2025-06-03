@@ -123,7 +123,7 @@ function FuncionarioList() {
     <TableContainer component={Paper}>
       <Toolbar
         sx={{
-          backgroundColor: "#ADD8E6",
+          backgroundColor: "#ed8f24",
           padding: 2,
           borderRadius: 1,
           mb: 2,
@@ -131,11 +131,11 @@ function FuncionarioList() {
           justifyContent: "space-between",
         }}
       >
-        <Typography variant="h6" color="primary">
+        <Typography variant="h6" color="#804b0f">
           Funcionários
         </Typography>
         <Button
-          color="primary"
+          color="#804b0f"
           onClick={() => navigate("/funcionario")}
           startIcon={<FiberNew />}
         >
@@ -180,7 +180,7 @@ function FuncionarioList() {
                     navigate(`/funcionario/view/${funcionario.id_funcionario}`)
                   }
                 >
-                  <Visibility color="primary" />
+                  <Visibility color="#804b0f" />
                 </IconButton>
                 {/* executa a rota, passando o opr edit e o id selecionado */}
                 <IconButton

@@ -20,7 +20,7 @@ import {
   createFuncionario,
   updateFuncionario,
   getFuncionarioById,
-  checkCpfExist // Importe o novo método
+  checkCpfExist, // Importe o novo método
 } from "../services/funcionarioService";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -123,11 +123,11 @@ const FuncionarioForm = () => {
     <Box
       component="form"
       onSubmit={handleSubmit(onSubmit)}
-      sx={{ backgroundColor: "#ADD8E6", padding: 2, borderRadius: 1, mt: 2 }}
+      sx={{ backgroundColor: "#ed8f24", padding: 2, borderRadius: 1, mt: 2 }}
     >
       <Toolbar
         sx={{
-          backgroundColor: "#ADD8E6",
+          backgroundColor: "#ed8f24",
           padding: 1,
           borderRadius: 2,
           mb: 2,
@@ -135,7 +135,7 @@ const FuncionarioForm = () => {
           justifyContent: "space-between",
         }}
       >
-        <Typography variant="h6" gutterBottom color="primary">
+        <Typography variant="h6" gutterBottom color="#804b0f">
           {title}
         </Typography>
       </Toolbar>
@@ -287,6 +287,9 @@ const FuncionarioForm = () => {
               margin="normal"
               error={!!errors.senha}
               helperText={errors.senha?.message}
+              inputProps={{
+                autoComplete: "new-password",
+              }}
             />
           )}
         />
