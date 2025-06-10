@@ -29,6 +29,9 @@ const Home = () => {
         <Typography variant="body1" color="textSecondary">
           Explore as funcionalidades e aproveite sua experiência.
         </Typography>
+        <Typography variant="body1" color="textSecondary">
+          Usuário: {sessionStorage.getItem("user")} - Grupo Atual: {sessionStorage.getItem("userGroup")}
+        </Typography>
         <Typography variant="body1" color="textDisabled">
           {`Data atual: ${new Date().toLocaleDateString()}`}
         </Typography>

@@ -88,6 +88,7 @@ const ProdutoForm = () => {
                 const data = await getProdutoById(id);
                 // O reset é uma função do react-hook-form que redefine os valores do formulário, no caso, para os valores retornados da consulta.
                 reset(data);
+                
                 // Se o produto já tiver uma foto, configurar a pré-visualização inicial
                 if (data.foto) {
                     setFoto(data.foto); // Define a foto existente no estado
