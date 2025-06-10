@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Toolbar, Typography, IconButton, Button, useMediaQuery } from '@mui/material';
-import { Edit, Delete, Visibility, FiberNew } from '@mui/icons-material';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useNavigate } from 'react-router-dom';
-import { getClientes, deleteCliente } from '../services/clienteService';
 import { toast } from 'react-toastify';
+
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Toolbar, Typography, IconButton, Button, useMediaQuery } from '@mui/material';
+import { Edit, Delete, Visibility, FiberNew, PictureAsPdf } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
+
+import { getClientes, deleteCliente } from '../services/clienteService';
+import PdfClienteList from '../components/PdfClienteList';
 
 function ClienteList() {
     const navigate = useNavigate();
@@ -68,6 +72,19 @@ function ClienteList() {
         <TableContainer component={Paper}>
             <Toolbar sx={{ backgroundColor: "#ed8f24", padding: 2, borderRadius: 1, mb: 2, display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="h6" color="#804b0f">Clientes</Typography>
+                <Button color="#804b0f" onClick={() => {}} startIcon={<PictureAsPdf />}>
+                    <PDFDownloadLink
+                        document={<PdfClienteList clientes={clientes} />}
+                        fileName="clientes.pdf"
+                        style={{
+                            color: 'inherit',
+                        }}
+                    >
+                        {({ loading }) =>
+                            loading ? 'Preparando PDF...' : 'Baixar PDF'
+                        }
+                    </PDFDownloadLink>
+                </Button>
                 <Button color="#804b0f" onClick={() => navigate('/cliente')} startIcon={<FiberNew />}>Novo</Button>
             </Toolbar>
             <Table>

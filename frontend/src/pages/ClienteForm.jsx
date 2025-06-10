@@ -40,8 +40,6 @@ const ClienteForm = () => {
                 retorno = await createCliente(data);
             }
 
-            console.log(retorno)
-
             if (!retorno?.id) {
                 throw new Error(retorno.erro || "Erro ao salvar cliente.");
             }

@@ -63,7 +63,6 @@ export const checkCpfExist = async (cpf, currentId = null) => {
 export const loginFuncionario = async (cpf, senha) => {
   try {
     const response = await axios.post(`${PROXY_URL}login`, { cpf, senha });
-    console.log("Response: ", response)
     return response.data;
   } catch (error) {
     console.error("Erro no login:", error.response?.data || error.message);

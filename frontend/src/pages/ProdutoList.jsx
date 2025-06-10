@@ -1,17 +1,14 @@
-// useEffect: usado para executar efeitos colaterais, como buscar dados da API / Proxy/BFF ao carregar o componente.
-// useState: usado para gerenciar o estado local do componente, como a lista.
 import React, { useEffect, useState } from "react";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Toolbar, Typography, IconButton, Button, useMediaQuery, }
-    from '@mui/material';
-import { Edit, Delete, Visibility, FiberNew } from '@mui/icons-material';
-// useNavigate: usado para navegar entre páginas.
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useNavigate } from 'react-router-dom';
-// serviços - funções para buscar e deletar
-import { getProdutos, deleteProduto } from '../services/produtoService';
-// mensagens de sucesso, erro e confirmação
 import { toast } from 'react-toastify';
-// useTheme: usado para acessar o tema do Material-UI.
+
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Toolbar, Typography, IconButton, Button, useMediaQuery } from '@mui/material';
+import { Edit, Delete, Visibility, FiberNew, PictureAsPdf } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
+
+import { getProdutos, deleteProduto } from '../services/produtoService';
+import PdfProdutoList from '../components/PdfProdutoList';
 
 function ProdutoList() {
     // O useNavigate é um hook que permite navegar programaticamente entre as rotas da aplicação
@@ -40,7 +37,6 @@ function ProdutoList() {
     // getProdutos: função que faz a chamada à API / Proxy/BFF para buscar os dados.
     const fetchProdutos = async () => {
         try {
-            console.log("Entrei na tela")
             const data = await getProdutos();
             setProdutos(data);
         } catch (error) {
@@ -71,7 +67,7 @@ function ProdutoList() {
         try {
             await deleteProduto(id);
             fetchProdutos();
-            toast.dismiss(); // Fecha o toast após a exclusão
+            toast.dismiss();
             toast.success('Produto excluído com sucesso!', { position: "top-center" });
         } catch (error) {
             console.error('Erro ao deletar produto:', error);
@@ -83,6 +79,19 @@ function ProdutoList() {
         <TableContainer component={Paper}>
             <Toolbar sx={{ backgroundColor: "#ed8f24", padding: 2, borderRadius: 1, mb: 2, display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="h6" color="#804b0f">Produtos</Typography>
+                <Button color="#804b0f" onClick={() => {}} startIcon={<PictureAsPdf />}>
+                    <PDFDownloadLink
+                        document={<PdfProdutoList produtos={produtos} />}
+                        fileName="produtos.pdf"
+                        style={{
+                            color: 'inherit',
+                        }}
+                    >
+                        {({ loading }) =>
+                            loading ? 'Preparando PDF...' : 'Baixar PDF'
+                        }
+                    </PDFDownloadLink>
+                </Button>
                 <Button color="#804b0f" onClick={() => navigate('/produto')} startIcon={<FiberNew />}>Novo</Button>
             </Toolbar>
             <Table>
