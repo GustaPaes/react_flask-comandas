@@ -1,23 +1,23 @@
-# React + Vite
+# API Proxy/BFF Python com Flask, Hypercorn e QUIC
 
 # Rodar localmente:
 
 ## Passo
-utilizar npm run app na pasta raiz
+utilizar "python .\src\app.py" na pasta raiz
 
 ## Para subir no Docker:
 
 ## Passo 1
-docker build -t comandas-frontend -f Dockerfile .
+docker build -t comandas-proxy-bff -f Dockerfile .
 
 ## Passo 2
 docker login -u gustapaes
 
 ## Passo 3
-docker tag comandas-frontend gustapaes/comandas-frontend
+docker tag comandas-proxy-bff gustapaes/comandas-proxy-bff
 
 ## Passo 4
-docker push gustapaes/comandas-frontend
+docker push gustapaes/comandas-proxy-bff
 
 ## Passo 5
 docker compose up -d
