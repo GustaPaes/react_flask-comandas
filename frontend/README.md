@@ -8,21 +8,24 @@ utilizar npm run app na pasta raiz
 ## Para subir no Docker:
 
 ## Passo 1
-docker build -t comandas-frontend -f Dockerfile .
+npm run build
 
 ## Passo 2
-docker login -u gustapaes
+docker build -t comandas-frontend -f DockerFile .
 
 ## Passo 3
-docker tag comandas-frontend gustapaes/comandas-frontend
+docker login -u gustapaes
 
 ## Passo 4
-docker push gustapaes/comandas-frontend
+docker tag comandas-frontend gustapaes/comandas-frontend
 
 ## Passo 5
-docker compose up -d
+docker push gustapaes/comandas-frontend
 
 ## Passo 6
+docker compose up -d
+
+## Passo 7
 Atualizar o ENV com o IP que está hospedando a outra API FRONTEND_URL e API_URL alterando 127.0.0.1 para o IP publico.
 
 ## Para visualização no Docker pode ser utilizado: https://127.0.0.1:4443/docs

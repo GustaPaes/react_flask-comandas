@@ -1,6 +1,6 @@
 services:
   comandas_proxy_bff:
-    image: coelholuciano/comandas-proxy-bff:latest
+    image: gustapaes/comandas-proxy-bff:latest
     container_name: comandas_proxy_bff
     ports:
     - "4444:4444"
